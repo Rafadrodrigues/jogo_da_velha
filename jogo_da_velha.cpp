@@ -1,139 +1,166 @@
 #include<iostream>
 #include<locale.h>
 using namespace std;
+
+#define X 1
+#define O 2
+#define y 3
+
 /*Criar um jogo da velha em c++*/
 
-#define X=1;
-#define O=2;
-#define vazio=0;
-/**/
-//Função para que o usuario 1  insira qual elemento deseja. 
-int inserir1(int num1){ 
-        if (num1==X){ //Condicional para identificar qual elemento foi selecionado
-            cout << "X";
-        }else if(num1==O){
-            cout << "O";
-        }
-    return num1;
+int jogador1(int num1){//Elemento selecionado pelo jogador 1. Pode ser removido
+    if(num1==X){
+        return 1;
+    }else if(num1==O){
+        return 2;
+    }
+}   
+int jogador2(int num2){//Elemento selecionado pelo jogador 2. Pode ser removido
+    if(num2==X){
+        return 1;
+    }else if(num2==O){
+        return 2;
+    }
 }
-//Função para que o usuario 2 insira qual elemento deseja.
-int inserir2(int num2){  
-    //Condicional para identificar qual elemento foi selecionado
-        if (num2==X){
-            cout << "X";
-        }else if(num2==O){
-            cout << "O";
-        }
-    return num2;
-}
-int inserir_posicao(){
-    int posicao;
-            cout << "\nPara escolher a posição, digite o número correspondente. ";
-            cin >> posicao;
-            cout << "\n======================================================================="<< endl;
-        return posicao;
-} 
-int vencedor(X,O){ //Çondições para ganhar o jogo
+int vencedor(int jogo[3][3]){//Condicoes de ganhar o jogo
+    
+        jogo[0][0]=9;
+        jogo[0][1]=8;
+        jogo[0][2]=7;
 
-    int formato [3][3]; // Dividir em vários if's
+        jogo[1][0]=6;
+        jogo[1][1]=5;
+        jogo[1][2]=4;
 
-    //Aceitas por O
-    if(formato[2][0]==O && formato[2][1]==O && formato[2][2]==O){
-        return O;
-    } 
-    if(formato[1][0]==O && formato[1][1]==O && formato[1][2]==O){
-        return O;
+        jogo[2][0]=3;
+        jogo[2][1]=2;
+        jogo[2][2]=1;
+
+    //Vencedor horizontal
+    if((jogo[0][0]==X && jogo[0][1]==X && jogo[0][2]==X)||(jogo[0][0]==O && jogo[0][1]==O && jogo[0][2]==O)){   
+        cout << "\nJogo Finalizado. " << endl;
     }
-    if(formato[0][0]==O && formato[0][1]==O && formato[0][2]==O){
-        return O;
+     if((jogo[1][0]==X && jogo[1][1]==X && jogo[1][2]==X)||(jogo[1][0]==O && jogo[1][1]==O && jogo[1][2]==O)){ 
+        cout << "\nJogo Finalizado. " << endl;
     }
-    if(formato[2][0]==O && formato[1][1]==O && formato[0][2]==O){
-        return O;
+     if((jogo[2][0]==X && jogo[2][1]==X && jogo[2][2]==X)||(jogo[2][0]==O && jogo[2][1]==O && jogo[2][2]==O)){ 
+        cout << "\nJogo Finalizado. " << endl;
     }
-    if(formato[2][2]==O && formato[1][1]==O && formato[0][0]==O){
-        return O;
+    //Vencedor vertical
+     if((jogo[0][0]==X && jogo[1][0]==X && jogo[2][0]==X)||(jogo[0][0]==O && jogo[1][0]==O && jogo[2][0]==O)){
+        cout << "\nJogo Finalizado. " << endl;
     }
-    if(formato[2][1]==O && formato[1][1]==O && formato[0][1]==O){
-        return O;
+     if((jogo[0][1]==X && jogo[1][1]==X && jogo[2][1]==X)||(jogo[0][1]==O && jogo[1][1]==O && jogo[2][1]==O)){
+        cout << "\nJogo Finalizado. " << endl;
     }
-    if(formato[2][0]==O && formato[1][0]==O && formato[0][0]==O){
-        return O;
+     if((jogo[0][2]==X && jogo[1][2]==X && jogo[2][2]==X)||(jogo[0][2]==O && jogo[1][2]==O && jogo[2][2]==O)){ 
+        cout << "\nJogo Finalizado. " << endl;
     }
-    if(formato[2][1]==O && formato[1][1]==O && formato[0][1]==O){
-        return O;
+    //Vencedor Diagonal
+     if((jogo[0][2]==X && jogo[1][1]==X && jogo[2][0]==X)||(jogo[0][0]==O && jogo[1][1]==O && jogo[2][0]==O)){ 
+        cout << "\nJogo Finalizado. " << endl;
     }
-    if(formato[2][2]==O && formato[1][2]==O && formato[0][2]==O){
-        return O;
+     if((jogo[0][0]==X && jogo[1][1]==X && jogo[2][2]==X)||(jogo[0][0]==O && jogo[1][1]==O && jogo[2][2]==O)){ 
+        cout << "\nJogo Finalizado. " << endl;
     }
-    //Aceitas por X
-    if(formato[2][0]==X && formato[2][1]==X && formato[2][2]==X){
-        return X;
-    }
-    if(formato[1][0]==X && formato[1][1]==X && formato[1][2]==X){
-        return X;
-    }
-    if(formato[0][0]==X && formato[0][1]==X && formato[0][2]==X){
-        return X;
-    }
-    if(formato[2][0]==X && formato[1][1]==X && formato[0][2]==X){
-        return X;
-    }
-    if(formato[2][2]==X && formato[1][1]==X && formato[0][0]==X){
-        return X;
-    } 
-    if(formato[2][1]==X && formato[1][1]==X && formato[0][1]==X){
-        return X;
-    } 
-    if(formato[2][0]==X && formato[1][0]==X && formato[0][0]==X){
-        return X;
-    }
-    if(formato[2][1]==X && formato[1][1]==X && formato[0][1]==X){
-        return X;
-    } 
-    if(formato[2][2]==X && formato[1][2]==X && formato[0][2]==X){
-        return X;
-    } 
 }
-void montar_jogo(){
-    int formato [3][3],venc=0,posicao=0;
-    venc=vencedor();
-    posicao=inserir_posicao();
-        int i,j;//caso precise
-    while(!venc){// Enquanto não houver vencedor, faça.
-        for(i=0;i<3;i++){
-            for(j=0;j<3;j++){
-                  formato[i][j];// Estruta de repetição para percorrer o vetor.   
-                    if(formato[i][j]==posicao){
-                        posicao==
-                }  
-            } 
-        }
-    }           
+int inserir_elemento1(int posicao, int jog1){//Inserir elementos do primeiro jogador
+    int jogo[3][3],l,c,valor;
+    int apenas_funcao=0,ganhar_jogo1;
+
+        jogo[0][0]=9;
+        jogo[0][1]=8;
+        jogo[0][2]=7;
+
+        jogo[1][0]=6;
+        jogo[1][1]=5;
+        jogo[1][2]=4;
+
+        jogo[2][0]=3;
+        jogo[2][1]=2;
+        jogo[2][2]=1;
+
+        apenas_funcao=vencedor(jogo);
+        ganhar_jogo1=apenas_funcao;
+
+        if(!ganhar_jogo1){
+            for(l=0;l<3;l++){
+			    for(c=0;c<3;c++){
+				    if(jogo[l][c]==posicao){
+                        return jogo[l][c]==jog1;
+                        cout << "\n" << jogo[l][c] << " | " ;
+                    }else{
+                        continue;
+                    }
+			    }
+            cout << endl;
+		} 
+    }    
+}
+
+int inserir_elemento2(int posicao,int jog2){//Inserir elementos do segundo jogador
+    int jogo[3][3],l,c,valor;
+    int apenas_funcao,ganhar_jogo2=0;
+
+        jogo[0][0]=9;
+        jogo[0][1]=8;
+        jogo[0][2]=7;
+
+        jogo[1][0]=6;
+        jogo[1][1]=5;
+        jogo[1][2]=4;
+
+        jogo[2][0]=3;
+        jogo[2][1]=2;
+        jogo[2][2]=1;
+
+        apenas_funcao=vencedor(jogo);
+        ganhar_jogo2=apenas_funcao;
+
+        if(!ganhar_jogo2){
+        for(l=0;l<3;l++){
+			for(c=0;c<3;c++){
+				if(jogo[l][c]==posicao){
+                    return jogo[l][c]==jog2;
+                    cout << "\n" <<jogo[l][c] << " | " << endl ;
+                }else{
+                    continue;
+                }
+			}
+            cout << endl;
+	    } 
+    }
 }
 int main (){
 
     setlocale(LC_ALL,"Portuguese");
 
-   cout << "\nSeja Bem-Vindo ao jogo da Velha.";
+    cout << "\nSeja Bem-Vindo ao jogo da Velha.";
     cout << "\n=========================================" << endl;
-    cout << "\nSelecione para X ou O." << endl;
+    cout << "\nSelecione 1 para X ou 2 para O." << endl;
     cout << "\n=========================================" << endl;
 
         cout << "\n9"<< "|"<< "8" << "|" << "7" << endl;
         cout << "6"<< "|" << "5" << "|" << "4" << endl;
         cout << "3" << "|" << "2" << "|" << "1" << endl;
+       
+       int jogador1,jogador2,posicao;
 
-        string valor1,valor2;
-        
-        int valor1;
-        cout << "\nJogador 1. Insira o Símbolo: ";
-        cout << "===========================================" << endl;
-        cin >>valor1;
+       cout << "\nJogador 1. Insira seu elemento.";
+       cin >> jogador1;
 
-        int valor2;
-        cout << "\nJogador 2. Insira o Símbolo: ";
-        cout << "===========================================" << endl;
-        cin >>valor2;
+       cout << "\nInforme a posicao. ";
+       cin >> posicao;
+
+       cout << inserir_elemento1(posicao,jogador1);
+       
+       cout << "\nJogador 2. Insira seu elemento.";
+       cin >> jogador2;
+
+       cout << "\nInforme a posicao. ";
+       cin >> posicao;
+
+       cout << inserir_elemento2(posicao,jogador2);
 
     return 0;
 }
