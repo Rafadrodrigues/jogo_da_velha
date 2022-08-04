@@ -1,166 +1,138 @@
 #include<iostream>
 #include<locale.h>
+#include<stdlib.h>
 using namespace std;
 
-#define X 1
-#define O 2
-#define y 3
-
-/*Criar um jogo da velha em c++*/
-
-int jogador1(int num1){//Elemento selecionado pelo jogador 1. Pode ser removido
-    if(num1==X){
-        return 1;
-    }else if(num1==O){
-        return 2;
-    }
-}   
-int jogador2(int num2){//Elemento selecionado pelo jogador 2. Pode ser removido
-    if(num2==X){
-        return 1;
-    }else if(num2==O){
-        return 2;
-    }
-}
-int vencedor(int jogo[3][3]){//Condicoes de ganhar o jogo
-    
-        jogo[0][0]=9;
-        jogo[0][1]=8;
-        jogo[0][2]=7;
-
-        jogo[1][0]=6;
-        jogo[1][1]=5;
-        jogo[1][2]=4;
-
-        jogo[2][0]=3;
-        jogo[2][1]=2;
-        jogo[2][2]=1;
-
-    //Vencedor horizontal
-    if((jogo[0][0]==X && jogo[0][1]==X && jogo[0][2]==X)||(jogo[0][0]==O && jogo[0][1]==O && jogo[0][2]==O)){   
-        cout << "\nJogo Finalizado. " << endl;
-    }
-     if((jogo[1][0]==X && jogo[1][1]==X && jogo[1][2]==X)||(jogo[1][0]==O && jogo[1][1]==O && jogo[1][2]==O)){ 
-        cout << "\nJogo Finalizado. " << endl;
-    }
-     if((jogo[2][0]==X && jogo[2][1]==X && jogo[2][2]==X)||(jogo[2][0]==O && jogo[2][1]==O && jogo[2][2]==O)){ 
-        cout << "\nJogo Finalizado. " << endl;
-    }
-    //Vencedor vertical
-     if((jogo[0][0]==X && jogo[1][0]==X && jogo[2][0]==X)||(jogo[0][0]==O && jogo[1][0]==O && jogo[2][0]==O)){
-        cout << "\nJogo Finalizado. " << endl;
-    }
-     if((jogo[0][1]==X && jogo[1][1]==X && jogo[2][1]==X)||(jogo[0][1]==O && jogo[1][1]==O && jogo[2][1]==O)){
-        cout << "\nJogo Finalizado. " << endl;
-    }
-     if((jogo[0][2]==X && jogo[1][2]==X && jogo[2][2]==X)||(jogo[0][2]==O && jogo[1][2]==O && jogo[2][2]==O)){ 
-        cout << "\nJogo Finalizado. " << endl;
-    }
-    //Vencedor Diagonal
-     if((jogo[0][2]==X && jogo[1][1]==X && jogo[2][0]==X)||(jogo[0][0]==O && jogo[1][1]==O && jogo[2][0]==O)){ 
-        cout << "\nJogo Finalizado. " << endl;
-    }
-     if((jogo[0][0]==X && jogo[1][1]==X && jogo[2][2]==X)||(jogo[0][0]==O && jogo[1][1]==O && jogo[2][2]==O)){ 
-        cout << "\nJogo Finalizado. " << endl;
+//Agora só preciso fazer uma condição de parada para quando um jogador ganhar voltar para o inicio.
+void menu(int opcao){
+    switch (opcao)
+    {
+    case 01:
+    system("cls");
+        break;
+    case 02:
+        cout << "\t\nPara selecionar a posicao que deseja inserir o elemento\t\nprimeiro escolha logo apos a coluna.";
+        cout << "\t\nQuem fizer primeiro a sequencia de 3 simbolos seguidos ganha o jogo.";
+        cout << "\t\nCaso deseje sair do jogo, apenas o fim da partida digite o numero 3.";
+        break;
+    case 03:
+        exit(3);
+        break;
+    default:
+        break;
     }
 }
-int inserir_elemento1(int posicao, int jog1){//Inserir elementos do primeiro jogador
-    int jogo[3][3],l,c,valor;
-    int apenas_funcao=0,ganhar_jogo1;
-
-        jogo[0][0]=9;
-        jogo[0][1]=8;
-        jogo[0][2]=7;
-
-        jogo[1][0]=6;
-        jogo[1][1]=5;
-        jogo[1][2]=4;
-
-        jogo[2][0]=3;
-        jogo[2][1]=2;
-        jogo[2][2]=1;
-
-        apenas_funcao=vencedor(jogo);
-        ganhar_jogo1=apenas_funcao;
-
-        if(!ganhar_jogo1){
-            for(l=0;l<3;l++){
-			    for(c=0;c<3;c++){
-				    if(jogo[l][c]==posicao){
-                        return jogo[l][c]==jog1;
-                        cout << "\n" << jogo[l][c] << " | " ;
-                    }else{
-                        continue;
-                    }
-			    }
-            cout << endl;
-		} 
+void mostrar_jogo(char estrutura[3][3]){ // Estrutura do jogo.
+        cout << "\n\t"<<estrutura[0][0] << " | " << estrutura[0][1]<< " | " << estrutura[0][2];
+        cout << "\n\t--|---|--";
+        cout << "\n\t"<<estrutura[1][0] << " | "<< estrutura[1][1] << " | "<< estrutura[1][2];
+        cout << "\n\t--|---|--";
+        cout << "\n\t"<< estrutura[2][0] << " | "<< estrutura[2][1] << " | "<< estrutura[2][2] << "\n";
     }    
-}
-
-int inserir_elemento2(int posicao,int jog2){//Inserir elementos do segundo jogador
-    int jogo[3][3],l,c,valor;
-    int apenas_funcao,ganhar_jogo2=0;
-
-        jogo[0][0]=9;
-        jogo[0][1]=8;
-        jogo[0][2]=7;
-
-        jogo[1][0]=6;
-        jogo[1][1]=5;
-        jogo[1][2]=4;
-
-        jogo[2][0]=3;
-        jogo[2][1]=2;
-        jogo[2][2]=1;
-
-        apenas_funcao=vencedor(jogo);
-        ganhar_jogo2=apenas_funcao;
-
-        if(!ganhar_jogo2){
-        for(l=0;l<3;l++){
-			for(c=0;c<3;c++){
-				if(jogo[l][c]==posicao){
-                    return jogo[l][c]==jog2;
-                    cout << "\n" <<jogo[l][c] << " | " << endl ;
-                }else{
-                    continue;
-                }
-			}
-            cout << endl;
-	    } 
+int vencedor(char estrutura[3][3]){ // Possíveis chances de vencer.
+    if(estrutura[0][0]=='X' && estrutura[0][1]=='X' && estrutura[0][2]=='X'){
+        cout << "\nParabens, voce venceu." << endl;
+    }else if(estrutura[1][0]=='X' && estrutura[1][1]=='X' && estrutura[1][2]=='X'){
+        cout << "\nParabens, voce venceu." << endl;
+    }else if (estrutura[2][0]=='X' && estrutura[2][1]=='X' && estrutura[2][2]=='X'){
+        cout << "\nParabens, voce venceu." << endl;
+    }else if (estrutura[0][0]=='X' && estrutura[1][0]=='X' && estrutura[2][0]=='X'){
+        cout << "\nParabens, voce venceu." << endl;
+    }else if (estrutura[0][1]=='X' && estrutura[1][1]=='X' && estrutura[2][1]=='X'){
+        cout << "\nParabens, voce venceu." << endl;
+    }else if (estrutura[0][2]=='X' && estrutura[1][2]=='X' && estrutura[2][2]=='X'){
+        cout << "\nParabens, voce venceu." << endl;
+    }else if (estrutura[0][0]=='X' && estrutura[1][1]=='X' && estrutura[2][2]=='X'){
+        cout << "\nParabens, voce venceu." << endl;
+    }else if (estrutura[0][2]=='X' && estrutura[1][1]=='X' && estrutura[2][0]=='X'){
+        cout << "\nParabens, voce venceu." << endl;
+    }else if(estrutura[0][0]=='O' && estrutura[0][1]=='O' && estrutura[0][2]=='O'){
+        cout << "\nParabens, voce venceu." << endl;
+    }else if(estrutura[1][0]=='O' && estrutura[1][1]=='O' && estrutura[1][2]=='O'){
+        cout << "\nParabens, voce venceu." << endl;
+    }else if (estrutura[2][0]=='O' && estrutura[2][1]=='O' && estrutura[2][2]=='O'){
+        cout << "\nParabens, voce venceu." << endl;
+    }else if (estrutura[0][0]=='O' && estrutura[1][0]=='O' && estrutura[2][0]=='O'){
+        cout << "\nParabens, voce venceu." << endl;
+    }else if (estrutura[0][1]=='O' && estrutura[1][1]=='O' && estrutura[2][1]=='O'){
+        cout << "\nParabens, voce venceu." << endl;
+    }else if (estrutura[0][2]=='O' && estrutura[1][2]=='O' && estrutura[2][2]=='O'){
+        cout << "\nParabens, voce venceu." << endl;
+    }else if (estrutura[0][0]=='O' && estrutura[1][1]=='O' && estrutura[2][2]=='O'){
+        cout << "\nParabens, voce venceu." << endl;
+    }else if (estrutura[0][2]=='O' && estrutura[1][1]=='O' && estrutura[2][0]=='O'){
+        cout << "\nParabens, voce venceu." << endl;
     }
+}
+int jogador1(int linha1,int coluna1,int linha2,int coluna2,char matriz[3][3]){
+    if((linha1<0)|| (coluna1<0) || (linha1>3) || (coluna1>3)){//Condições em que o jogo daria errado
+        cout << "\nJogada invalida.";
+            }else if((linha1==linha2)&&(coluna1==coluna2)){
+                cout << "\nEssa posicao ja esta sendo ocupada, tente novamente." << endl;
+            }else{
+                matriz[linha1-1][coluna1-1]='X';//Para que a linha e coluna selecionada esteja de acordo ao vetor, Ex.linha-1 corresponde char=[0]
+                system("cls");
+                mostrar_jogo(matriz);
+                vencedor(matriz);//Avaliar condiçao de vencedor .
+            }
+}
+int jogador2(int linha2,int coluna2,int linha1,int coluna1,char matriz[3][3]){
+     if((linha2<1)|| (coluna2<1)||(linha2>3)||(coluna2>3)){//Condições em que o jogo daria errado
+        cout << "\nJogada invalida.";
+            }else if((linha2==linha1)&&(coluna2==coluna1)){
+                cout << "\nEssa posicao ja esta sendo ocupada, tente novamente." << endl;
+            }else{
+                matriz[linha2-1][coluna2-1]='O';
+                system("cls");
+                mostrar_jogo(matriz);
+                vencedor(matriz);
+            }
 }
 int main (){
 
     setlocale(LC_ALL,"Portuguese");
 
+    int opcao_jogo;
+    int linha1,coluna1,linha2,coluna2,quantidade_de_jogadas=1;//Criei duas variavel para linha e coluna, apenas para me facilitar na construção
+    char matriz[3][3]={{' ',' ',' ',},{' ',' ',' ',},{' ',' ',' '}};
+        
     cout << "\nSeja Bem-Vindo ao jogo da Velha.";
     cout << "\n=========================================" << endl;
-    cout << "\nSelecione 1 para X ou 2 para O." << endl;
-    cout << "\n=========================================" << endl;
+    cout << "\t\n1-Novo jogo: " << endl;
+    cout << "\t\n2-Instrucoes: " << endl;
+    cout << "\t\n3-Sair do jogo." << endl; 
 
-        cout << "\n9"<< "|"<< "8" << "|" << "7" << endl;
-        cout << "6"<< "|" << "5" << "|" << "4" << endl;
-        cout << "3" << "|" << "2" << "|" << "1" << endl;
-       
-       int jogador1,jogador2,posicao;
+    cout << "\nSelecione: ";
+    cin >> opcao_jogo;
+        
+        menu(opcao_jogo);
+        cout << "\n=========================================" << endl;
+        cout << "\nSelecione X ou O." << endl;
+        cout << "\n=========================================" << endl;
+        
+        mostrar_jogo(matriz);
+    
+            while (quantidade_de_jogadas<=9){// o máximo de jogadas que pode ter no jogo.
+            quantidade_de_jogadas++;//contador para quantidade de jogadas.
 
-       cout << "\nJogador 1. Insira seu elemento.";
-       cin >> jogador1;
+            cout << "\nJogador 01-" << "X";
 
-       cout << "\nInforme a posicao. ";
-       cin >> posicao;
+            cout << "\nInforme a linha que deseja inserir o elemento: ";
+            cin >> linha1;
 
-       cout << inserir_elemento1(posicao,jogador1);
-       
-       cout << "\nJogador 2. Insira seu elemento.";
-       cin >> jogador2;
+            cout << "\nInforme a coluna que deseja inserir o elemento: ";
+            cin >> coluna1;
 
-       cout << "\nInforme a posicao. ";
-       cin >> posicao;
+            jogador1(linha1,coluna1,linha2,coluna2,matriz);
+                
+            cout << "\nJogador 02-" << "O";
+            cout << "\nInforme a linha que deseja inserir o elemento: ";
+            cin >> linha2;
 
-       cout << inserir_elemento2(posicao,jogador2);
-
+            cout << "\nInforme a coluna que deseja inserir o elemento: ";
+            cin >> coluna2;
+            
+            jogador2(linha2,coluna2,linha1,coluna1,matriz);
+        }
     return 0;
-}
+}   
