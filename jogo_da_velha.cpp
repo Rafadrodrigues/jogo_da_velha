@@ -1,6 +1,5 @@
 #include<iostream>
 #include<locale.h>
-#include<stdlib.h>
 using namespace std;
 
 void menu(int opcao){
