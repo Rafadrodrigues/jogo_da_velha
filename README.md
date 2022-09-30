@@ -1,2 +1,5 @@
 # jogo_da_velha
- Processo em andamento. Estou desenvolvendo o jogo da velha em C++ apenas para treinar minha lógica de programação. Código está quase todo pronto, falta apenas a condiçãop de parada quando um jogador ganha e uma de retorno.
+
+Jogo concluído. Realizei esse projeto com o intuito apenas de melhorar minha lógica de programação e meus conhecimentos em C++. 
+
+Utilizei algumas ideias da internet como forma de ajuda e por ela consegui facilitar diversos caminhos, ampliei minha gama de conhecimentos e lógica de programação.
