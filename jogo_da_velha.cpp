@@ -12,7 +12,7 @@ void mostrar_jogo(char estrutura[3][3]){ // Estrutura do jogo.
         cout << "\n\t"<< estrutura[2][0] << " | "<< estrutura[2][1] << " | "<< estrutura[2][2] << "\n";
 }
 //Função de avaliação do vencedor.
-bool vencedor(char estrutura[3][3]){ // Possíveis chances de vencer. Talvez precise alterar
+bool vencedor(char estrutura[3][3]){ // Possíveis chances de vencer.
     if(estrutura[0][0]=='X' && estrutura[0][1]=='X' && estrutura[0][2]=='X'){
         return true;
     }else if(estrutura[1][0]=='X' && estrutura[1][1]=='X' && estrutura[1][2]=='X'){
@@ -59,7 +59,7 @@ int main (){
     
     cout << "\nSeja Bem-Vindo ao jogo da Velha.";
     cout << "\n=========================================" << endl;
-    cout << "\t\n1-Iniciar: " << endl;
+    cout << "\t\n1-Iniciar. " << endl;
     cout << "\t\n2-Sair do jogo." << endl; 
     cout << "\n=========================================" << endl;
     cout << "\nSelecione: ";
