@@ -2,7 +2,6 @@
 #include<locale.h>
 #include<stdlib.h>
 using namespace std;
-
 //Função responsável pela estrutura do jogo.
 void mostrar_jogo(char estrutura[3][3]){ // Estrutura do jogo.
         cout << "\n\t"<<estrutura[0][0] << " | " << estrutura[0][1]<< " | " << estrutura[0][2];
